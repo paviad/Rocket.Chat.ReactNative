@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, ListRenderItem, Text, View } from 'react-native';
+import { Alert, FlatList, ListRenderItem, Text, View } from 'react-native';
 import { connect } from 'react-redux';
 import { StackNavigationOptions, StackNavigationProp } from '@react-navigation/stack';
 import { CompositeNavigationProp } from '@react-navigation/native';
@@ -172,15 +172,34 @@ class DirectoryView extends React.Component<IDirectoryViewProps, IDirectoryViewS
 			return;
 		}
 		if (['p', 'c'].includes(item.t) && !item.teamMain) {
-			const result = await Services.getRoomByTypeAndName(item.t, item.name || item.fname);
-			if (result) {
-				this.goRoom({
-					rid: item._id,
-					name: item.name,
-					joinCodeRequired: result.joinCodeRequired,
-					t: item.t as SubscriptionType,
-					search: true
-				});
+			try {
+				const result = await Services.getRoomInfo(item._id);
+				if (result.success) {
+					this.goRoom({
+						rid: item._id,
+						name: item.name,
+						joinCodeRequired: result.room.joinCodeRequired,
+						t: item.t as SubscriptionType,
+						search: true
+					});
+				}
+			} catch (error) {
+				const details = (error as any)?.data?.details;
+				const visiblePrivateRoom = details?.visiblePrivateRoom;
+				if (visiblePrivateRoom) {
+					const owner = details?.owner;
+					const result = await Services.createDirectMessage(owner.username as string);
+					if (result.success) {
+						this.goRoom({
+							rid: result.room._id,
+							name: item.username,
+							t: SubscriptionType.DIRECT,
+							suggestedInitialMessage: `Please invite me to the #${item.name} room, thank you.`
+						});
+					}
+				} else {
+					Alert.alert('Unknown room'); // TODO: make this more elegant -- Aviad
+				}
 			}
 		} else {
 			this.goRoom({

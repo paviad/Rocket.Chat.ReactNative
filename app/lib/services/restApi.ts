@@ -29,6 +29,7 @@ export const createChannel = ({
 	readOnly,
 	broadcast,
 	encrypted,
+	visibleEvenWhenPrivate,
 	teamId
 }: {
 	name: string;
@@ -37,6 +38,7 @@ export const createChannel = ({
 	readOnly: boolean;
 	broadcast: boolean;
 	encrypted: boolean;
+	visibleEvenWhenPrivate: boolean;
 	teamId: string;
 }) => {
 	const params = {
@@ -46,6 +48,7 @@ export const createChannel = ({
 		extraData: {
 			broadcast,
 			encrypted,
+			visibleEvenWhenPrivate,
 			...(teamId && { teamId })
 		}
 	};

@@ -21,7 +21,9 @@ const serverInfoKeys = [
 	'Force_Screen_Lock',
 	'Force_Screen_Lock_After',
 	'uniqueID',
-	'E2E_Enable'
+	'E2E_Enable',
+	'E2E_Enabled_Default_PrivateRooms',
+	'Peers_AutoGenerateE2EKeyPassword'
 ];
 
 // these settings are used only on onboarding process
@@ -85,6 +87,12 @@ const serverInfoUpdate = async (serverInfo: IPreparedSettings[], iconSetting: IS
 		if (setting._id === 'E2E_Enable') {
 			return { ...allSettings, E2E_Enable: setting.valueAsBoolean };
 		}
+		if (setting._id === 'E2E_Enabled_Default_PrivateRooms') {
+			return { ...allSettings, E2E_Enabled_Default_PrivateRooms: setting.valueAsBoolean };
+		}
+		if (setting._id === 'Peers_AutoGenerateE2EKeyPassword') {
+			return { ...allSettings, Peers_AutoGenerateE2EKeyPassword: setting.valueAsBoolean };
+		}
 		return allSettings;
 	}, {});
 
@@ -146,16 +154,31 @@ export async function getSettings(): Promise<void> {
 		const db = database.active;
 		const settingsParams = Object.keys(defaultSettings).filter(key => !loginSettings.includes(key));
 		// RC 0.60.0
-		const result = await fetch(
-			`${sdk.current.client.host}/api/v1/settings.public?query={"_id":{"$in":${JSON.stringify(settingsParams)}}}&count=${
-				settingsParams.length
-			}`
-		).then(response => response.json());
+		let offset = 0;
+		let remaining;
+		let settings: IData[] = [];
 
-		if (!result.success) {
-			return;
-		}
-		const data: IData[] = result.settings || [];
+		// Iterate over paginated results to retrieve all settings
+		do {
+			// TODO: why is no-await-in-loop enforced in the first place?
+			/* eslint-disable no-await-in-loop */
+			const response = await fetch(
+				`${sdk.current.client.host}/api/v1/settings.public?query={"_id":{"$in":${JSON.stringify(settingsParams)}}}
+				&offset=${offset}`);
+
+			const result = await response.json();
+
+			if (!result.success) {
+				return;
+			}
+
+			offset += result.settings.length;
+			settings = [...settings, ...result.settings];
+			remaining = result.total - settings.length;
+			/* eslint-enable no-await-in-loop */
+		} while(remaining > 0);
+
+		const data: IData[] = settings;
 		const filteredSettings: IPreparedSettings[] = _prepareSettings(data);
 		const filteredSettingsIds = filteredSettings.map(s => s._id);
 		const parsedSettings = parseSettings(filteredSettings);

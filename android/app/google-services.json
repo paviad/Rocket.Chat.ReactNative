@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "114119516719",
+    "project_id": "peersmd-app",
+    "storage_bucket": "peersmd-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:114119516719:android:02a24189f8cefe45c41cda",
+        "android_client_info": {
+          "package_name": "com.peers.peersmd"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "114119516719-lj6avo9fkrs8gnraf99be87bjgcl6gcr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBNONoIKYPdxo6oFNAmpjYdAsjD2ASzqU4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "114119516719-lj6avo9fkrs8gnraf99be87bjgcl6gcr.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "114119516719-9o9u7asqn3kgojqke4qurbomsgo60ng2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.peers.peersmd.NotificationService"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

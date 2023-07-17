@@ -23,6 +23,8 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.X509TrustManager;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
+
+import okhttp3.Call;
 import okhttp3.OkHttpClient;
 import android.app.Activity;
 import javax.net.ssl.KeyManager;
@@ -109,7 +111,7 @@ public class SSLPinningModule extends ReactContextBaseJavaModule implements KeyC
         // RNCWebView onReceivedClientCertRequest
         RNCWebViewManager.setCertificateAlias(data);
         // FastImage Glide network layer
-        FastImageOkHttpUrlLoader.setOkHttpClient(getOkHttpClient());
+        FastImageOkHttpUrlLoader.setOkHttpClient((Call.Factory) getOkHttpClient());
         // Expo AV network layer
         SharedCookiesDataSourceFactory.setOkHttpClient(getOkHttpClient());
 

@@ -242,9 +242,7 @@ class MessageContainer extends React.Component<IMessageContainerProps, IMessageC
 				!(previousItem.groupable === false || item.groupable === false || broadcast === true) &&
 				// @ts-ignore TODO: IMessage vs IMessageFromServer non-sense
 				item.ts - previousItem.ts < Message_GroupingPeriod * 1000 &&
-				previousItem.tmid === item.tmid &&
-				item.t !== 'rm' &&
-				previousItem.t !== 'rm'
+				previousItem.tmid === item.tmid
 			) {
 				return false;
 			}
@@ -281,7 +279,7 @@ class MessageContainer extends React.Component<IMessageContainerProps, IMessageC
 
 	get isInfo(): string | boolean {
 		const { item } = this.props;
-		if (['e2e', 'discussion-created', 'jitsi_call_started', 'videoconf'].includes(item.t)) {
+		if (['e2e', 'discussion-created', 'jitsi_call_started'].includes(item.t)) {
 			return false;
 		}
 		return item.t;

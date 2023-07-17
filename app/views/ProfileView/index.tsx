@@ -246,8 +246,8 @@ class ProfileView extends React.Component<IProfileViewProps, IProfileViewState> 
 		try {
 			const twoFactorOptions = params.currentPassword
 				? {
-						twoFactorCode: params.currentPassword,
-						twoFactorMethod: TwoFactorMethods.PASSWORD
+					twoFactorCode: params.currentPassword,
+					twoFactorMethod: TwoFactorMethods.PASSWORD
 				  }
 				: null;
 

@@ -13,6 +13,7 @@ export interface IEncryptionSetBanner extends Action {
 }
 export interface IEncryptionDecodeKey extends Action {
 	password: string;
+	dontGoBack: boolean;
 }
 
 export type TActionEncryption = IEncryptionSet & IEncryptionSetBanner & IEncryptionDecodeKey;
@@ -44,9 +45,10 @@ export function encryptionSetBanner(banner: IBanner = ''): IEncryptionSetBanner 
 	};
 }
 
-export function encryptionDecodeKey(password: string): IEncryptionDecodeKey {
+export function encryptionDecodeKey(password: string, dontGoBack = false): IEncryptionDecodeKey {
 	return {
 		type: ENCRYPTION.DECODE_KEY,
-		password
+		password,
+		dontGoBack
 	};
 }

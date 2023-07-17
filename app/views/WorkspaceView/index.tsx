@@ -1,5 +1,5 @@
 import React, { useLayoutEffect } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { CompositeNavigationProp } from '@react-navigation/core';
@@ -92,6 +92,18 @@ const WorkspaceView = () => {
 				) : (
 					<RegisterDisabledComponent />
 				)}
+				<Image
+					style={[
+						{
+							'flex': 1,
+							'width': 200,
+							'resizeMode': 'contain',
+							'alignSelf': 'center'
+						}
+					]}
+					source={require('../../static/images/hippa_logo.png')}
+					fadeDuration={0}
+				/>
 			</FormContainerInner>
 		</FormContainer>
 	);

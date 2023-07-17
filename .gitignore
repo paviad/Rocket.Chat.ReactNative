@@ -4,6 +4,7 @@
 
 # Xcode
 #
+!android/app/src/debug
 build/
 *.pbxuser
 !default.pbxuser
@@ -38,6 +39,13 @@ local.properties
 node_modules/
 npm-debug.log
 yarn-error.log
+.yarn/*
+!.yarn/cache
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
 
 coverage/
 
@@ -70,3 +78,10 @@ e2e/e2e_account.ts
 junit.xml
 
 *.p8
+/tmp/
+iosold/
+android/private_key.pepk
+android/app/**/debug
+android/app/**/release
+secrets/
+*.pem

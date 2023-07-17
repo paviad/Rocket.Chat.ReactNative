@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, TextInputProps, TouchableOpacity, TouchableOpacityProps, View } from 'react-native';
+import { Image, StyleSheet, Text, TextInputProps, TouchableOpacity, TouchableOpacityProps, View } from 'react-native';
 
 import I18n from '../../../i18n';
 import sharedStyles from '../../Styles';
@@ -8,6 +8,8 @@ import { isIOS, isTablet } from '../../../lib/methods/helpers';
 import { useOrientation } from '../../../dimensions';
 import { useTheme } from '../../../theme';
 import SearchHeader from '../../../containers/SearchHeader';
+import ServerAvatar from "../../WorkspaceView/ServerAvatar";
+import { result } from 'lodash';
 
 const styles = StyleSheet.create({
 	container: {
@@ -22,6 +24,12 @@ const styles = StyleSheet.create({
 		flexShrink: 1,
 		...sharedStyles.textSemibold
 	},
+	serverAvatar: {
+        marginRight: 10,
+		width: 20,
+        height: 20,
+		resizeMode: 'contain'
+    },
 	subtitle: {
 		...sharedStyles.textRegular
 	},
@@ -47,7 +55,7 @@ const Header = React.memo(
 		connecting,
 		connected,
 		isFetching,
-		serverName = 'Rocket.Chat',
+		serverName = 'Peers.MD',
 		server,
 		// showServerDropdown,
 		showSearchHeader,
@@ -71,15 +79,17 @@ const Header = React.memo(
 		} else if (!connected) {
 			subtitle = I18n.t('Waiting_for_network');
 		} else {
-			subtitle = server?.replace(/(^\w+:|^)\/\//, '');
+			subtitle = false;
 		}
 		return (
 			<View style={styles.container}>
 				{/* <TouchableOpacity onPress={onPress} testID='rooms-list-header-server-dropdown-button'> */}
 				<View style={styles.button}>
+					<Image style={styles.serverAvatar} source={require('../../../static/images/logo_black.png')}/>
 					<Text style={[styles.title, { fontSize: titleFontSize, color: colors.headerTitleColor }]} numberOfLines={1}>
 						{serverName}
 					</Text>
+
 					{/* <CustomIcon
 						name='chevron-down'
 						color={colors.headerTintColor}

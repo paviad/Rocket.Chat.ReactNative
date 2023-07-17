@@ -253,6 +253,7 @@ class RoomView extends React.Component<IRoomViewProps, IRoomViewState> {
 		const name = props.route.params?.name;
 		const fname = props.route.params?.fname;
 		const prid = props.route.params?.prid;
+		const suggestedInitialMessage = props.route.params?.suggestedInitialMessage;
 		const room = props.route.params?.room ?? {
 			rid: this.rid as string,
 			t: this.t as string,
@@ -284,7 +285,8 @@ class RoomView extends React.Component<IRoomViewProps, IRoomViewState> {
 			canForwardGuest: false,
 			canReturnQueue: false,
 			canPlaceLivechatOnHold: false,
-			isOnHold: false
+			isOnHold: false,
+			suggestedInitialMessage
 		};
 
 		this.setHeader();
@@ -1414,9 +1416,11 @@ class RoomView extends React.Component<IRoomViewProps, IRoomViewState> {
 	};
 
 	renderFooter = () => {
-		const { joined, room, selectedMessage, editing, replying, replyWithMention, readOnly, loading, canViewCannedResponse } =
+		const { joined, room, selectedMessage, editing, replying, replyWithMention, readOnly, loading, canViewCannedResponse, suggestedInitialMessage } =
 			this.state;
 		const { navigation, theme, route } = this.props;
+
+		this.setState(state => ({ ...state, suggestedInitialMessage: null }));
 
 		const usedCannedResponse = route?.params?.usedCannedResponse;
 
@@ -1493,6 +1497,7 @@ class RoomView extends React.Component<IRoomViewProps, IRoomViewState> {
 				isFocused={navigation.isFocused}
 				theme={theme}
 				message={selectedMessage}
+				suggestedInitialMessage={suggestedInitialMessage}
 				editing={editing}
 				editRequest={this.onEditRequest}
 				editCancel={this.onEditCancel}

@@ -364,10 +364,9 @@ const MessageActions = React.memo(
 
 			const getOptions = (message: TAnyMessageModel) => {
 				const options: TActionSheetOptionsItem[] = [];
-				const videoConfBlock = message.t === 'videoconf';
 
 				// Quote
-				if (!isReadOnly && !videoConfBlock) {
+				if (!isReadOnly) {
 					options.push({
 						title: I18n.t('Quote'),
 						icon: 'quote',
@@ -385,7 +384,7 @@ const MessageActions = React.memo(
 				}
 
 				// Reply in DM
-				if (room.t !== 'd' && room.t !== 'l' && createDirectMessagePermission && !videoConfBlock) {
+				if (room.t !== 'd' && room.t !== 'l' && createDirectMessagePermission) {
 					options.push({
 						title: I18n.t('Reply_in_direct_message'),
 						icon: 'arrow-back',
@@ -416,13 +415,11 @@ const MessageActions = React.memo(
 				});
 
 				// Copy
-				if (!videoConfBlock) {
-					options.push({
-						title: I18n.t('Copy'),
-						icon: 'copy',
-						onPress: () => handleCopy(message)
-					});
-				}
+				options.push({
+					title: I18n.t('Copy'),
+					icon: 'copy',
+					onPress: () => handleCopy(message)
+				});
 
 				// Share
 				options.push({
@@ -432,7 +429,7 @@ const MessageActions = React.memo(
 				});
 
 				// Edit
-				if (allowEdit(message) && !videoConfBlock) {
+				if (allowEdit(message)) {
 					options.push({
 						title: I18n.t('Edit'),
 						icon: 'edit',
@@ -441,7 +438,7 @@ const MessageActions = React.memo(
 				}
 
 				// Pin
-				if (Message_AllowPinning && permissions?.hasPinPermission && !videoConfBlock) {
+				if (Message_AllowPinning && permissions?.hasPinPermission) {
 					options.push({
 						title: I18n.t(message.pinned ? 'Unpin' : 'Pin'),
 						icon: 'pin',
@@ -450,7 +447,7 @@ const MessageActions = React.memo(
 				}
 
 				// Star
-				if (Message_AllowStarring && !videoConfBlock) {
+				if (Message_AllowStarring) {
 					options.push({
 						title: I18n.t(message.starred ? 'Unstar' : 'Star'),
 						icon: message.starred ? 'star-filled' : 'star',

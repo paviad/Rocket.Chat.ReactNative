@@ -13,17 +13,22 @@ export const RoomSettings = ({
 	isTeam,
 	setValue,
 	createChannelPermission,
-	createPrivateChannelPermission
+	createPrivateChannelPermission,
+	defaultEncryptionOn,
+	defaultVisibleEvenWhenPrivate
 }: {
 	isTeam: boolean;
 	setValue: UseFormSetValue<IFormData>;
 	createChannelPermission: boolean;
 	createPrivateChannelPermission: boolean;
+	defaultEncryptionOn: boolean;
+	defaultVisibleEvenWhenPrivate: boolean;
 }) => {
 	const [type, setType] = useState(true);
 	const [readOnly, setReadOnly] = useState(false);
-	const [encrypted, setEncrypted] = useState(false);
+	const [encrypted, setEncrypted] = useState(defaultEncryptionOn);
 	const [broadcast, setBroadcast] = useState(false);
+	const [visibleEvenWhenPrivate, setVisibleEvenWhenPrivate] = useState(defaultVisibleEvenWhenPrivate);
 
 	const { encryptionEnabled } = useAppSelector(state => ({
 		encryptionEnabled: state.encryption.enabled
@@ -61,6 +66,12 @@ export const RoomSettings = ({
 		setValue('readOnly', value ? true : readOnly);
 	};
 
+	const onValueChangeVisibleEvenWhenPrivate = useCallback((value: boolean) => {
+		logEvent(events.CR_TOGGLE_VISIBLEEVENWHENPRIVATE);
+		setVisibleEvenWhenPrivate(value);
+		setValue('visibleEvenWhenPrivate', value);
+	}, []);
+
 	const isDisabled = [createChannelPermission, createPrivateChannelPermission].filter(r => r === true).length <= 1;
 
 	return (
@@ -90,6 +101,13 @@ export const RoomSettings = ({
 				label={'Broadcast'}
 				hint={'Broadcast_hint'}
 				onValueChange={onValueChangeBroadcast}
+			/>
+			<SwitchItem
+				id={'visibleEvenWhenPrivate'}
+				value={visibleEvenWhenPrivate}
+				label={'VisibleEvenWhenPrivate'}
+				hint={'VisibleEvenWhenPrivate_hint'}
+				onValueChange={onValueChangeVisibleEvenWhenPrivate}
 			/>
 		</>
 	);

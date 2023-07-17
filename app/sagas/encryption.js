@@ -2,7 +2,7 @@ import EJSON from 'ejson';
 import { put, select, takeLatest } from 'redux-saga/effects';
 
 import { ENCRYPTION } from '../actions/actionsTypes';
-import { encryptionSet } from '../actions/encryption';
+import { encryptionSet, encryptionDecodeKey } from '../actions/encryption';
 import { Encryption } from '../lib/encryption';
 import Navigation from '../lib/navigation/appNavigation';
 import database from '../lib/database';
@@ -13,15 +13,18 @@ import I18n from '../i18n';
 import log from '../lib/methods/helpers/log';
 import { E2E_BANNER_TYPE, E2E_PRIVATE_KEY, E2E_PUBLIC_KEY, E2E_RANDOM_PASSWORD_KEY } from '../lib/constants';
 import { Services } from '../lib/services';
+import { getMashup } from '../lib/encryption/get-mashup';
 
 const getServer = state => state.share.server.server || state.server.server;
 const getE2eEnable = state => state.settings.E2E_Enable;
+const getPeersAutoGenerateE2EKeyPassword = state => state.settings.Peers_AutoGenerateE2EKeyPassword;
 
 const handleEncryptionInit = function* handleEncryptionInit() {
 	try {
 		const server = yield select(getServer);
 		const user = yield select(getUserSelector);
 		const E2E_Enable = yield select(getE2eEnable);
+		const Peers_AutoGenerateE2EKeyPassword = yield select(getPeersAutoGenerateE2EKeyPassword);
 
 		// Fetch server info to check E2E enable
 		const serversDB = database.servers;
@@ -47,8 +50,15 @@ const handleEncryptionInit = function* handleEncryptionInit() {
 		// A private key was received from the server, but it's not saved locally yet
 		// Show the banner asking for the password
 		if (!storedPrivateKey && keys?.privateKey) {
-			yield put(encryptionSet(false, E2E_BANNER_TYPE.REQUEST_PASSWORD));
-			return;
+			if (Peers_AutoGenerateE2EKeyPassword) {
+				const mashup = getMashup(server, user.id);
+				log(`Using mashup for ${mashup}, for user ${user.id}`); // TODO: sensitive - remove in production
+				yield put(encryptionDecodeKey(mashup, true));
+				return;
+			} else {
+				yield put(encryptionSet(false, E2E_BANNER_TYPE.REQUEST_PASSWORD));
+				return;
+			}
 		}
 
 		// Fetch stored public e2e key for this server
@@ -64,7 +74,7 @@ const handleEncryptionInit = function* handleEncryptionInit() {
 			yield Encryption.persistKeys(server, storedPublicKey, storedPrivateKey);
 		} else {
 			// Create new keys since the user doesn't have any
-			yield Encryption.createKeys(user.id, server);
+			yield Encryption.createKeys(user.id, server, Peers_AutoGenerateE2EKeyPassword);
 		}
 
 		// If the user has a private key stored, but never entered the password
@@ -90,7 +100,7 @@ const handleEncryptionStop = function* handleEncryptionStop() {
 	Encryption.stop();
 };
 
-const handleEncryptionDecodeKey = function* handleEncryptionDecodeKey({ password }) {
+const handleEncryptionDecodeKey = function* handleEncryptionDecodeKey({ password, dontGoBack }) {
 	try {
 		const server = yield select(getServer);
 		const user = yield select(getUserSelector);
@@ -112,7 +122,9 @@ const handleEncryptionDecodeKey = function* handleEncryptionDecodeKey({ password
 		// Hide encryption banner
 		yield put(encryptionSet(true));
 
-		Navigation.back();
+		if (!dontGoBack) {
+			Navigation.back();
+		}
 	} catch {
 		// Can't decrypt user private key
 		showErrorAlert(I18n.t('Encryption_error_desc'), I18n.t('Encryption_error_title'));

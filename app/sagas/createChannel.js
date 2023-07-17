@@ -42,12 +42,13 @@ const handleRequest = function* handleRequest({ data }) {
 				};
 			}
 		} else {
-			const { type, readOnly, broadcast, encrypted } = data;
+			const { type, readOnly, broadcast, encrypted, visibleEvenWhenPrivate } = data;
 			logEvent(events.CR_CREATE, {
 				type: type ? 'private' : 'public',
 				readOnly,
 				broadcast,
-				encrypted
+				encrypted,
+				visibleEvenWhenPrivate
 			});
 			const result = yield Services.createChannel(data);
 			sub = {

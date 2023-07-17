@@ -116,6 +116,7 @@ export interface IMessageBoxProps extends IBaseScreen<ChatsStackParamList & Mast
 	uploadFilePermission: string[];
 	goToCannedResponses: () => void | null;
 	serverVersion: string;
+	suggestedInitialMessage?: string;
 }
 
 interface IMessageBoxState {
@@ -237,7 +238,7 @@ class MessageBox extends Component<IMessageBoxProps, IMessageBoxState> {
 
 	async componentDidMount() {
 		const db = database.active;
-		const { rid, tmid, navigation, sharing, usedCannedResponse } = this.props;
+		const { rid, tmid, navigation, sharing, usedCannedResponse, isMasterDetail } = this.props;
 		let msg;
 		try {
 			const threadsCollection = db.get('threads');
@@ -272,7 +273,7 @@ class MessageBox extends Component<IMessageBoxProps, IMessageBoxState> {
 			EventEmiter.addEventListener(KEY_COMMAND, this.handleCommands);
 		}
 
-		if (usedCannedResponse) {
+		if (isMasterDetail && usedCannedResponse) {
 			this.onChangeText(usedCannedResponse);
 		}
 
@@ -891,7 +892,6 @@ class MessageBox extends Component<IMessageBoxProps, IMessageBoxState> {
 		logEvent(events.ROOM_SHOW_BOX_ACTIONS);
 		const { permissionToUpload } = this.state;
 		const { showActionSheet, goToCannedResponses } = this.props;
-
 		const options: TActionSheetOptionsItem[] = [];
 		if (goToCannedResponses) {
 			options.push({
@@ -925,11 +925,11 @@ class MessageBox extends Component<IMessageBoxProps, IMessageBoxState> {
 			);
 		}
 
-		options.push({
-			title: I18n.t('Create_Discussion'),
-			icon: 'discussions',
-			onPress: this.createDiscussion
-		});
+		/*	options.push({
+				title: I18n.t('Create_Discussion'),
+				icon: 'discussions',
+				onPress: this.createDiscussion
+			});*/
 
 		this.closeEmojiAndAction(showActionSheet, { options });
 	};
@@ -1203,16 +1203,17 @@ class MessageBox extends Component<IMessageBoxProps, IMessageBoxState> {
 			Message_AudioRecorderEnabled,
 			children,
 			isActionsEnabled,
-			tmid
+			tmid,
+			suggestedInitialMessage
 		} = this.props;
 
 		const isAndroidTablet: Partial<IThemedTextInput> =
 			isTablet && isAndroid
 				? {
-						multiline: false,
-						onSubmitEditing: this.submit,
-						returnKeyType: 'send'
-				  }
+					multiline: false,
+					onSubmitEditing: this.submit,
+					returnKeyType: 'send'
+				}
 				: {};
 
 		const recordAudio =
@@ -1242,6 +1243,14 @@ class MessageBox extends Component<IMessageBoxProps, IMessageBoxState> {
 				getCustomEmoji={getCustomEmoji}
 			/>
 		) : null;
+
+		if (suggestedInitialMessage) {
+			setTimeout(() => {
+				this.component.focus();
+				this.setInput(suggestedInitialMessage);
+				this.setShowSend(true);
+			}, 100);
+		}
 
 		const textInputAndButtons = !recording ? (
 			<>

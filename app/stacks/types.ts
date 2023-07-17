@@ -37,6 +37,7 @@ export type ChatsStackParamList = {
 				usedCannedResponse?: string;
 				status?: string;
 				replyInDM?: TAnyMessageModel;
+				suggestedInitialMessage?: string;
 		  }
 		| undefined; // Navigates back to RoomView already on stack
 	RoomActionsView: {

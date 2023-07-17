@@ -13,6 +13,7 @@ interface IGoRoomItem {
 	name?: string;
 	prid?: string;
 	visitor?: IVisitor;
+	suggestedInitialMessage?: string;
 }
 
 export type TGoRoomItem = IGoRoomItem | TSubscriptionModel | ISubscription | IOmnichannelRoomVisitor;
@@ -27,6 +28,7 @@ const navigate = ({
 	isMasterDetail: boolean;
 	popToRoot: boolean;
 }) => {
+	const suggestedInitialMessage = 'suggestedInitialMessage' in item ? item.suggestedInitialMessage : undefined;
 	const routeParams = {
 		rid: item.rid,
 		name: getRoomTitle(item),
@@ -35,6 +37,7 @@ const navigate = ({
 		room: item,
 		visitor: item.visitor,
 		roomUserId: getUidDirectMessage(item),
+		suggestedInitialMessage,
 		...props
 	};
 
@@ -97,14 +100,15 @@ export const goRoom = async ({
 	if (!('id' in item) && item.t === SubscriptionType.DIRECT && item?.search) {
 		// if user is using the search we need first to join/create room
 		try {
-			const { username } = item;
+			const { username, suggestedInitialMessage } = item;
 			const result = await Services.createDirectMessage(username as string);
 			if (result.success && result?.room?._id) {
 				return navigate({
 					item: {
 						rid: result.room._id,
 						name: username || '',
-						t: SubscriptionType.DIRECT
+						t: SubscriptionType.DIRECT,
+						suggestedInitialMessage
 					},
 					isMasterDetail,
 					popToRoot,

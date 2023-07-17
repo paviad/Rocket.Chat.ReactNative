@@ -6,12 +6,11 @@ export default StyleSheet.create({
 	serverName: {
 		...sharedStyles.textSemibold,
 		fontSize: 16,
-		marginBottom: 4
+		marginBottom: 24
 	},
 	serverUrl: {
 		...sharedStyles.textRegular,
-		fontSize: 14,
-		marginBottom: 24
+		fontSize: 14
 	},
 	registrationText: {
 		fontSize: 14,

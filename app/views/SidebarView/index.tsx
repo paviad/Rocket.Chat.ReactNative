@@ -5,6 +5,7 @@ import { Alert, ScrollView, Text, TouchableWithoutFeedback, View, Linking } from
 import { connect } from 'react-redux';
 import { dequal } from 'dequal';
 import { Dispatch } from 'redux';
+import GitInfo from 'react-git-info/macro';
 
 import Avatar from '../../containers/Avatar';
 import Status from '../../containers/Status/Status';
@@ -255,6 +256,21 @@ class Sidebar extends Component<ISidebarProps, ISidebarState> {
 					current={this.currentItemKey === 'SettingsStackNavigator'}
 				/>
 				{this.renderAdmin()}
+				{this.renderGitInfo()}
+			</>
+		);
+	};
+
+	renderGitInfo = () => {
+		const gitInfo = GitInfo();
+		const shortSha = gitInfo.commit.shortHash;
+
+		return (
+			<>
+				<List.Separator />
+				<View style={{ padding: 20 }}>
+					<Text>Commit: {shortSha}</Text>
+				</View>
 			</>
 		);
 	};

@@ -286,6 +286,10 @@ android {
             dimension = "app"
             buildConfigField "boolean", "IS_OFFICIAL", "false"
         }
+        e2e {
+            dimension = "app"
+            buildConfigField "boolean", "IS_OFFICIAL", "false"
+        }
         foss {
             dimension = "type"
             buildConfigField "boolean", "FDROID_BUILD", "true"
@@ -311,6 +315,16 @@ android {
         }
         officialPlayRelease {
             java.srcDirs = ['src/main/java', 'src/play/java']
+            manifest.srcFile 'src/play/AndroidManifest.xml'
+        }
+        e2ePlayDebug {
+            java.srcDirs = ['src/main/java', 'src/play/java']
+            res.srcDirs = ['src/experimental/res']
+            manifest.srcFile 'src/play/AndroidManifest.xml'
+        }
+        e2ePlayRelease {
+            java.srcDirs = ['src/main/java', 'src/play/java']
+            res.srcDirs = ['src/experimental/res']
             manifest.srcFile 'src/play/AndroidManifest.xml'
         }
     }
@@ -377,7 +391,7 @@ dependencies {
     implementation "com.github.bumptech.glide:glide:4.9.0"
     annotationProcessor "com.github.bumptech.glide:compiler:4.9.0"
     implementation "com.tencent:mmkv-static:1.2.10"
-    androidTestImplementation('com.wix:detox:+')
+    androidTestImplementation('com.wix:detox:+') { transitive = true }
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'com.facebook.soloader:soloader:0.10.4'
 }

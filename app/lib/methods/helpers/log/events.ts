@@ -114,6 +114,7 @@ export default {
 	CR_TOGGLE_TYPE: 'cr_toggle_type',
 	CR_TOGGLE_READ_ONLY: 'cr_toggle_read_only',
 	CR_TOGGLE_BROADCAST: 'cr_toggle_broadcast',
+	CR_TOGGLE_VISIBLEEVENWHENPRIVATE: 'cr_toggle_visible_even_when_private',
 	CR_TOGGLE_ENCRYPTED: 'cr_toggle_encrypted',
 	CR_REMOVE_USER: 'cr_remove_user',
 	CT_ADD_ROOM_TO_TEAM: 'ct_add_room_to_team',

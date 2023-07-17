@@ -44,7 +44,6 @@ const FormContainer = ({ children, testID, ...props }: IFormContainer) => {
 			>
 				<SafeAreaView testID={testID} style={{ backgroundColor: themes[theme].backgroundColor }}>
 					{children}
-					<AppVersion theme={theme} />
 				</SafeAreaView>
 			</ScrollView>
 		</KeyboardView>

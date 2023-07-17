@@ -1,11 +1,9 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import FastImage from 'react-native-fast-image';
+import { StyleSheet, View, Image } from 'react-native';
 
 import { isTablet } from '../../lib/methods/helpers';
-import { useTheme } from '../../theme';
 
-const SIZE = 96;
+const SIZE = 180;
 const MARGIN_TOP = isTablet ? 0 : 64;
 const BORDER_RADIUS = 8;
 
@@ -30,14 +28,24 @@ interface IServerAvatar {
 }
 
 // TODO: missing skeleton
-const ServerAvatar = React.memo(({ url, image }: IServerAvatar) => {
-	const { colors } = useTheme();
-
-	return (
-		<View style={styles.container}>
-			{image && <FastImage style={[styles.image, { borderColor: colors.borderColor }]} source={{ uri: `${url}/${image}` }} />}
-		</View>
-	);
-});
+const ServerAvatar = React.memo(({ image }: IServerAvatar) => (
+	<View style={styles.container}>
+		{image && (
+			// <FastImage style={[styles.image, { borderColor: themes[theme].borderColor }]} source={{ uri: `${url}/${image}` }} />
+			<Image
+				style={[
+					{
+						'flex': 1,
+						'width': 160,
+						'resizeMode': 'contain',
+						'alignSelf': 'center'
+					}
+				]}
+				source={require('../../static/images/peers_black_text.png')}
+				fadeDuration={0}
+			/>
+		)}
+	</View>
+));
 
 export default ServerAvatar;
