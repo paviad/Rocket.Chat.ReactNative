@@ -1,0 +1,357 @@
+    1  sudo echo hi
+    2  exit
+    3  motd
+    4  apt update
+    5  sudo apt update
+    6  apt list --upgradable
+    7  dig vaad.co.il
+    8  sudo apt install bind9-dnsutils
+    9  dig vaad.co.il
+   10  dig core.vaad.co.il
+   11  node
+   12  nvm
+   13  nvm install 14.21.3
+   14  npm i -g yarn
+   15  node --version
+   16  yarn
+   17  dir
+   18  ls -l
+   19  rm -rf node_modules
+   20  rm yarn.lock 
+   21  git
+   22  git --version
+   23  cd Rocket.Chat
+   24  yarn
+   25  more package
+   26  more package.json 
+   27  yarn run build:meteor
+   28  yarn run "build:meteor"
+   29  more README.
+   30  more README.md 
+   31  git grep meteor
+   32  yarn
+   33  ls /tmp
+   34  more /tmp/xfs-69ab925e/build.log 
+   35  apt install make
+   36  sudo apt install make
+   37  yarn
+   38  more /tmp/xfs-9555a34a/build.log 
+   39  apt install python3.12.3
+   40  sudo apt install python3.12.3
+   41  sudo apt install python3.12
+   42  py
+   43  python
+   44  python --version
+   45  sudo apt install python
+   46  sudo apt install python-is-python3
+   47  python --version
+   48  yarn
+   49  more /tmp/xfs-24b4f63e/build.log 
+   50  apt install g++
+   51  sudo apt install g++
+   52  yarn
+   53  yarn run build:meteor
+   54  npm i -g meteor
+   55  yarn run build:meteor
+   56  meteor
+   57  cd Rocket.Chat
+   58  yarn run build:meteor
+   59  ls
+   60  cd
+   61  ls -la
+   62  ls -ltr
+   63  ls -latr
+   64  more .bashrc 
+   65  vi .bashrc
+   66  source .bashrc
+   67  vi .bash_profile 
+   68  ls
+   69  cd Rocket.Chat
+   70  ls
+   71  yarn run build:meteor
+   72  ls apps/meteor/packages/rocketchat-livechat/.npm/plugin
+   73  ls apps/meteor/packages/rocketchat-livechat/.npm
+   74  ls apps/meteor/packages/rocketchat-livechat
+   75  cd
+   76  mkdir peers
+   77  cd peers
+   78  cd ..
+   79  rm peers
+   80  rmdir peers
+   81  git clone git@github.com:PeersMD/container-repo-for-info.git peers
+   82  ls .ssh
+   83  ls -la .ssh
+   84  cd .ssh
+   85  ls -la
+   86  chmod og-r id_ed25519 id_rsa kaf3 
+   87  cd
+   88  git clone git@github.com:PeersMD/container-repo-for-info.git peers
+   89  cd peers
+   90  git submodule update --init
+   91  cd Rocket.Chat
+   92  git remote -v
+   93  exit
+   94  sudo apt install default-jdk
+   95  java
+   96  javac
+   97  sdk
+   98  curl -s "https://get.sdkman.io" | bash
+   99  apt install zip
+  100  sudo apt install zip
+  101  curl -s "https://get.sdkman.io" | bash
+  102  source "/home/aviad/.sdkman/bin/sdkman-init.sh"
+  103  sdk help
+  104  sdk install gradle 8.3
+  105  gradle -version
+  106  cd
+  107  ls
+  108  exit
+  109  cd
+  110  cd peers/
+  111  ls
+  112  cd Rocket.Chat.ReactNative/
+  113  ls
+  114  cd ..
+  115  git remote -v
+  116  cd Rocket.Chat
+  117  git remote -v
+  118  git remote add aviad git@github.com:PeersMD/Rocket.Chat.git
+  119  git fetch aviad
+  120  cd ..
+  121  cd Rocket.Chat.ReactNative/
+  122  git remote add aviad git@github.com:PeersMD/peers_android.git
+  123  git fetch aviad
+  124  cd ..
+  125  git submodule update
+  126  cd Rocket.Chat
+  127  git log
+  128  git fetch aviad next:next
+  129  git status
+  130  git checkout next
+  131  git log
+  132  git status
+  133  git push
+  134  git push --set-upstream aviad next
+  135  cd ..l
+  136  cd ..
+  137  cd Rocket.Chat
+  138  cd ..
+  139  cd Rocket.Chat.ReactNative/
+  140  git status
+  141  git log
+  142  git fetch aviad next:next
+  143  git push --set-upstream aviad next
+  144  git remote -v
+  145  ls
+  146  cd ..
+  147  sudo apt install android-sdk
+  148  echo $ANDROID_SDK_HOME
+  149  cd
+  150  cd peers/
+  151  echo $ANDROID_SDK_HOME
+  152  ls /usr/lib
+  153  vi ~/.bashrc
+  154  cd
+  155  cd peers
+  156  echo $ANDROID_SDK_HOME
+  157  vi ~/.bashrc
+  158  echo $ANDROID_SDK_ROOT
+  159  androidsdk
+  160  sudo apt remote android-sdk
+  161  sudo apt remove android-sdk
+  162  sudo snap install androidsdk
+  163  sdkmanager
+  164  sudo sudo install sdkmanager
+  165  sudo sdk install sdkmanager
+  166  sudo snap install sdkmanager
+  167  androidsdk
+  168  sudo snap install sdkmanager
+  169  sdkmanager
+  170  cd Rocket.Chat.ReactNative/
+  171  cd android/
+  172  ls
+  173  ./gradlew
+  174  ./gradlew tasks
+  175  ./gradlew --stacktrace --info
+  176  javac --version
+  177  sdk list java
+  178  sdk list
+  179  sdk install java 11.0.27
+  180  sdk list java
+  181  sdk install java 11.0.27-ms
+  182  sdk default java 11.0.27-ms
+  183  javac --version
+  184  cd 
+  185  cd peers/
+  186  git status
+  187  git submodule
+  188  ls
+  189  cd
+  190  sudo yum remove awscli
+  191  sudo snap install aws-cli --classic
+  192  aws --version
+  193  aws configure sso
+  194  aws s3 ls
+  195  export AWS_DEFAULT_PROFILE=AdministratorAccess-232223464823
+  196  aws s3 ls
+  197  npm i -g serverless
+  198  exit
+  199  cd
+  200  cd peers
+  201  git submodule
+  202  git status
+  203  git log
+  204  git status
+  205  git remote -v
+  206  git log
+  207  git pull
+  208  git log origin/master
+  209  git remote -v
+  210  git branch
+  211  git log
+  212  git log a9c819e5906553113cc0c08938d311cf55e17901
+  213  git
+  214  git log
+  215  git submodule
+  216  git status
+  217  git pull
+  218  git log\
+  219  git log
+  220  pwd
+  221  git log
+  222  git status
+  223  git remote -v
+  224  git fetch origin
+  225  git log
+  226  git reset --hard origin/master
+  227  git log
+  228  git submodule update --init
+  229  aws
+  230  ls
+  231  exit
+  232  cd
+  233  javac --version
+  234  cd peers/Rocket.Chat.ReactNative/
+  235  cd android/
+  236  .\gradlew
+  237  ./gradle
+  238  ./gradlew
+  239  cd ..
+  240  ls
+  241  yarn
+  242  ./gradlew
+  243  cd android/
+  244  ./gradlew
+  245  .\gradlew tasks
+  246  ./gradlew tasks
+  247  androidsdk --licenses
+  248  ./gradlew tasks
+  249  sdkmanager
+  250  sdkmanager --licenses
+  251  androidsdk --licenses
+  252  androidsdk --help
+  253  androidsdk --list
+  254  androidsdk --list | grep ndk
+  255  ./gradlew tasks
+  256  androidsdk --list | grep 21.4.7075529
+  257  sudo /usr/lib/android-sdk/cmdline-tools/latest/bin/sdkmanager --licenses
+  258  sdk 
+  259  history
+  260  history | grep snap
+  261  sdkmanager
+  262  sudo snap install sdkmanager
+  263  androidsdk
+  264  cd /usr/lib
+  265  ls
+  266  cd android-sdk/
+  267  ls
+  268  ls -l
+  269  cd ..
+  270  cd
+  271  sudo apt uninstall android-sdk
+  272  sudo apt remove android-sdk
+  273  ls /snap
+  274  ls /snap/androidsdk/
+  275  ls /snap/androidsdk/current
+  276  cd peers/
+  277  cd Rocket.Chat.ReactNative/
+  278  cd android/
+  279  ls
+  280  vi gradle.properties 
+  281  vi local.properties
+  282  ./gradlew tasks
+  283  androidsdk "ndk;21.4.7075529"
+  284  ./gradlew tasks
+  285  androidsdk --licenses
+  286  ./gradlew tasks
+  287  cd
+  288  cd peers/Rocket.Chat.ReactNative/android/
+  289  ./gradlew tasks
+  290  ./gradlew clean
+  291  androidsdk "ndk;21.4.7075529"
+  292  sudo rm -rf /snap/androidsdk/current/licenses
+  293  androidsdk --licenses
+  294  ./gradlew tasks
+  295  echo $ANDROID_SDK_ROOT
+  296  vi ~/.bashrc
+  297  echo $ANDROID_SDK_ROOT
+  298  cd
+  299  cd peers/Rocket.Chat.ReactNative/android/
+  300  ./gradlew clean
+  301  androidsdk "ndk;21.4.7075529"
+  302  androidsdk --licenses
+  303  ls /snap/androidsdk/current/licenses
+  304  cd /snap/
+  305  cd androidsdk/
+  306  ls
+  307  cd current
+  308  ls
+  309  find . -name licenses
+  310  cd /
+  311  cd pee
+  312  cd
+  313  cd peers/
+  314  cd Rocket.Chat.ReactNative/
+  315  cd android/
+  316  rm local.properties 
+  317  ./gradlew clean
+  318  sudo $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --licenses
+  319  sudo $ANDROID_SDK_ROOT/tools/bin/sdkmanager --licenses
+  320  ls -l /snap/androidsdk/current/ndk/
+  321  androidsdk "ndk;21.4.7075529"
+  322  ls /snap
+  323  ls /snap/androidsdk/
+  324  ls /snap/androidsdk/current
+  325  which androidsdk
+  326  ls ~/AndroidSDK/
+  327  ls ~/AndroidSDK/ndk/
+  328  vi local.properties
+  329  ls ~/AndroidSDK/ndk/
+  330  ls ~/AndroidSDK/ndk/21.4.7075529/
+  331  vi local.properties
+  332  ./gradlew clean
+  333  androidsdk "cmake;3.10.2.4988404"
+  334  ./gradlew clean
+  335  androidsdk --licenses
+  336  ./gradlew clean
+  337  androidsdk "cmake;3.10.2.4988404"
+  338  cd 
+  339  cd peers/Rocket.Chat.ReactNative/android/
+  340  ./gradlew clean
+  341  ls /snap/androidsdk/current
+  342  ls ~/AndroidSDK/
+  343  ls ~/AndroidSDK/cmake/
+  344  vi local.properties 
+  345  ./gradlew clean
+  346  rm local.properties 
+  347  cd
+  348  cd peers/Rocket.Chat.ReactNative/android/
+  349  echo $ANDROID_SDK_ROOT
+  350  echo $ANDROID_HOME
+  351  .\gradlew tasks
+  352  ./gradlew tasks
+  353  ./gradlew
+  354  ls
+  355  cd ..
+  356  ls
+  357  history > history.txt
